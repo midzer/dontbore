@@ -422,7 +422,7 @@ textarea {
 
 input[type="text"],
 textarea {
-    width: 150px;
+    width: calc(100% - 1.6rem);
 }
 
 input[readonly],
@@ -515,4 +515,5 @@ blockquote footer {
 /* Custom */
 input[type="search"] {
     display: inline-block;
+    width: 150px;
 }
