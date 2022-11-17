@@ -48,7 +48,7 @@
 </script>
 
 <h1>{ $page.url.pathname.substring(1) } logins</h1>
-<article>
+<article id="logins">
   <ol>
     {#each data.logins as login}
       <li>
@@ -61,7 +61,7 @@
   </aside>
 </article>
 <hr>
-<section>
+<section id="share">
   <form on:submit|preventDefault={onSubmit}>
     <h2>Share a login</h2>
     <label for="domain">Site:</label>
