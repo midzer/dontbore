@@ -389,7 +389,7 @@ input,
 label,
 select,
 textarea {
-    display: inline-block;
+    display: block;
     font-size: inherit;
     max-width: var(--width-card-wide);
 }
@@ -510,4 +510,9 @@ blockquote footer {
     font-size: small;
     line-height: var(--line-height);
     padding: 1.5rem 0;
+}
+
+/* Custom */
+input[type="search"] {
+    display: inline-block;
 }
