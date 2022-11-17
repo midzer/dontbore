@@ -142,7 +142,7 @@ nav {
     margin-bottom: 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     nav {
         display: flex;
     }
