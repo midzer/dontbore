@@ -3,7 +3,7 @@
   import { invalidateAll } from '$app/navigation';
   
   let domain = $page.url.pathname.substring(1);
-  let username, password, check, task, dialog;
+  let username, password, check, task;
 
   export let data;
 
@@ -24,15 +24,6 @@
       //console.log(data); // JSON data parsed by `data.json()` call
       invalidateAll();
     });
-    onCancel();
-  }
-
-  function onShare (event) {
-    dialog.showModal();
-  }
-
-  function onCancel (event) {
-    dialog.close();
   }
 
   async function postData(url, data) {
@@ -66,12 +57,13 @@
     {/each}
   </ol>
   <aside>
-    <p>No logins found or working? Please register a fake account then <button on:click={onShare}>share</button> the login.</p>
+    <p>No logins found or working? Please register a fake account then share the login below ↓.</p>
   </aside>
 </article>
-<dialog bind:this={dialog}>
-  <h2>Share a login</h2>
+<hr>
+<section>
   <form on:submit|preventDefault={onSubmit}>
+    <h2>Share a login</h2>
     <label for="domain">Site:</label>
     <input type="text" name="domain" bind:value={domain}>
     <label for="username">Username:</label>
@@ -81,6 +73,5 @@
     <label for="check">Check:</label>
     <input type="text" name="check" placeholder={task.name} bind:value={check}>
     <button type="submit" disabled={domain && username && password && check == task.result ? false : true}>Submit</button>
-    <button on:click={onCancel}>Cancel</button>
   </form>
-</dialog>
+</section>
