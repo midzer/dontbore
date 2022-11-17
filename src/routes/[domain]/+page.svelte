@@ -19,7 +19,7 @@
   }
 
   function onSubmit (event) {
-    postData(`http://localhost:63409/${domain}`, { user: username, pass: password })
+    postData(`http://api.dontbo.re/${domain}`, { user: username, pass: password })
     .then((data) => {
       //console.log(data); // JSON data parsed by `data.json()` call
       invalidateAll();
