@@ -11,6 +11,7 @@
 
 <svelte:head>
   <title>DontBore{ domain ? ' - ' + domain : ''}</title>
+  <meta name="description" content="Find and share logins provided by the community">
   <link rel="manifest" href="/site.webmanifest">
 </svelte:head>
 

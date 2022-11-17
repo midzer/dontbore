@@ -2,7 +2,7 @@
     "name": "DontBore",
     "lang": "en",
     "short_name": "dontbore",
-    "description": "Find and share logins",
+    "description": "Find and share logins provided by the community",
     "theme_color": "#f1dd15",
     "background_color": "#0e102e",
     "display": "standalone",
