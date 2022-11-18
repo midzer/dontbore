@@ -1,16 +1,24 @@
 <script>
   import { page } from '$app/stores';
   import { invalidateAll } from '$app/navigation';
+  import { /*onMount,*/ afterUpdate, beforeUpdate } from 'svelte';
   
   let domain = $page.url.pathname.substring(1);
   let username, password, check, task;
 
   export let data;
 
+  // via https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values_inclusive
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   function generateTask() {
-    const a = Math.floor(Math.random() * 10);
-    const b = Math.floor(Math.random() * 10);
-    const c = Math.floor(Math.random());
+    const a = getRandomIntInclusive(0,9);
+    const b = getRandomIntInclusive(0,9);
+    const c = getRandomIntInclusive(0,1);
     
     task = {
         name: `${a}${c ? '+' : '-'}${b}=?`,
@@ -19,17 +27,18 @@
   }
 
   function onSubmit (event) {
-    postData(`https://api.dontbo.re/${domain}`, { user: username, pass: password })
+    pushData(`https://api.dontbo.re/${domain}`, 'POST', { user: username, pass: password })
     .then((data) => {
-      //console.log(data); // JSON data parsed by `data.json()` call
       invalidateAll();
+      window.location = window.location.origin + window.location.pathname + '#logins';
     });
+    username = password = check = '';
   }
 
-  async function postData(url, data) {
+  async function pushData(url, method, data) {
     // Default options are marked with *
     const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: method, // *GET, POST, PUT, DELETE, etc.
         //mode: 'no-cors', // no-cors, *cors, same-origin
         //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         //credentials: 'same-origin', // include, *same-origin, omit
@@ -44,20 +53,105 @@
     return response.json();
   }
 
+  function query (selector) {
+    return Array.from(document.querySelectorAll(selector))
+  }
+
+  function onCopy (event) {
+    const button = event.target;
+    const input = button.previousElementSibling;
+    input.select();
+    document.execCommand('copy');
+    button.textContent = 'Done ✔️';
+
+    window.setTimeout(() => {
+      button.textContent = 'Copy 💾';
+    }, 1000);
+  }
+
+  function onUpvote (event) {
+    vote(event.target, 1);
+  }
+
+  function onDownvote (event) {
+    vote(event.target, -1);
+  }
+
+  function vote (button, value) {
+    const element = button.closest('li');
+    const date = element.getAttribute('data-date');
+    const vote = element.getAttribute('data-vote');
+    pushData(`https://api.dontbo.re/${domain}`, 'PUT', { date: date, vote: parseInt(vote) + value })
+    .then((data) => {
+      invalidateAll();
+    });
+    button.disabled = true;
+  }
+
+  afterUpdate(() => {
+    query('.btn-copy').forEach(button => {
+      button.addEventListener('click', onCopy);
+    });
+
+    query('.btn-upvote').forEach(button => {
+      button.addEventListener('click', onUpvote);
+    });
+
+    query('.btn-downvote').forEach(button => {    
+      button.addEventListener('click', onDownvote);
+    });
+  });
+
+  beforeUpdate(() => {
+    query('.btn-copy').forEach(button => {
+      button.removeEventListener('click', onCopy);
+    });
+
+    query('.btn-upvote').forEach(button => {
+      function onUpvote (event) {
+        vote(button, 1);
+      }
+      button.removeEventListener('click', onUpvote);
+    });
+
+    query('.btn-downvote').forEach(button => {
+      function onDownvote (event) {
+        vote(button, -1);
+      }
+      button.removeEventListener('click', onDownvote);
+    });
+  });
+
   generateTask();
 </script>
 
-<h1>{ $page.url.pathname.substring(1) } logins</h1>
 <article id="logins">
+  <h1>{ $page.url.pathname.substring(1) } logins</h1>
   <ol>
-    {#each data.logins as login}
-      <li>
-        Username: <samp>{login.user}</samp> / Password: <samp>{login.pass}</samp>
+    {#each data.logins as login, index}
+      <li data-date={login.date} data-vote={login.vote}>
+        submitted on: <samp>{new Intl.DateTimeFormat().format(Date.parse(login.date))}</samp>
+        <label for="user{index}">Username:</label>
+        <div class="input-group">
+          <input type="text" name="user{index}"value={login.user} readonly>
+          <button class="btn-copy">Copy 💾</button>
+        </div>
+        <label for="pass{index}">Password:</label>
+        <div class="input-group">
+          <input type="text" name="pass{index}"value={login.pass} readonly>
+          <button class="btn-copy">Copy 💾</button>
+        </div>
+        <label for="vote{index}">Votes:</label>
+        <div class="input-group">
+          <input type="text" name="vote{index}"value={login.vote} readonly>
+          <button class="btn-upvote">Up 🔺</button>
+          <button class="btn-downvote">Down 🔻</button>
+        </div>
       </li>
     {/each}
   </ol>
   <aside>
-    <p>No logins found or working? Please register a fake account then share the login below ↓.</p>
+    <p>No logins found or working? Please register a fake account then <a href="#share">share</a> the login below ↓.</p>
   </aside>
 </article>
 <hr>
