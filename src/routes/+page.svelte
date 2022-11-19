@@ -3,9 +3,6 @@
 
   export let data;
 
-  data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  data = data.slice(0, 4);
-
   const now = new Date(Date.now());
 </script>
 
