@@ -28,6 +28,8 @@
 	}
 </script>
 <form on:submit|preventDefault={onSubmit}>
-  <input type="search" placeholder="domain or URL" bind:value={input}>
-  <button type="submit" disabled={input ? false : true}>Go 🚀</button>
+  <div class="input-group">
+    <input type="search" placeholder="domain or URL" bind:value={input}>
+    <button type="submit" disabled={input ? false : true}>Go 🚀</button>
+  </div>
 </form>

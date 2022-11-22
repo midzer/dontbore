@@ -514,11 +514,6 @@ blockquote footer {
 }
 
 /* Custom */
-input[type="search"] {
-    display: inline-block;
-    width: 175px;
-}
-
 .input-group {
     position: relative;
     display: flex;
