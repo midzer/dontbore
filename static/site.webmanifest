@@ -2,9 +2,21 @@
     "name": "DontBore",
     "lang": "en",
     "short_name": "DontBore",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
     "description": "Find and share logins provided by the community",
-    "theme_color": "#f1dd15",
-    "background_color": "#0e102e",
+    "theme_color": "#07080d",
+    "background_color": "#96e64a",
     "display": "standalone",
     "start_url": "/",
     "orientation": "any"
