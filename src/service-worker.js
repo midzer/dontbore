@@ -29,7 +29,6 @@ self.addEventListener('activate', (event) => {
         keys.filter((key) =>
           key !== applicationCache &&
           key !== staticCache &&
-          key !== 'postsCache' &&
           key !== 'ssrCache')
           .map((key) => caches.delete(key)));
     })
@@ -41,7 +40,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', function(event) {
   if (event.request.method !== "POST") {
     event.respondWith(
-      caches.open(cacheName).then(function(cache) {
+      caches.open('ssrCache').then(function(cache) {
         return fetch(event.request).then(function(response) {
           cache.put(event.request, response.clone());
           return response;
