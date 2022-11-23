@@ -37,3 +37,16 @@ self.addEventListener('activate', (event) => {
     .then(() => console.log('activated'))
   );
 });
+
+self.addEventListener('fetch', function(event) {
+  if (event.request.method !== "POST") {
+    event.respondWith(
+      caches.open(cacheName).then(function(cache) {
+        return fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      })
+    );
+  }
+});
