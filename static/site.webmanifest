@@ -15,8 +15,8 @@
         }
     ],
     "description": "Find and share logins provided by the community",
-    "theme_color": "#96e64a",
-    "background_color": "#07080d",
+    "theme_color": "#9bcd39",
+    "background_color": "#00464d",
     "display": "standalone",
     "start_url": "/",
     "orientation": "any"
