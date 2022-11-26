@@ -22,6 +22,14 @@
     <summary>How do I create a fake account?</summary>
     <p>There are multiple throw away or trash eMail services around. Your search engine is your friend.</p>
   </details>
+  <details>
+    <summary>What happens to the submitted data?</summary>
+    <p>All contributions will be made available publically when it's time.</p>
+  </details>
+  <details>
+    <summary>Browsing sucks. Is there any other way to access those logins?</summary>
+    <p>Yes, there is a <a href="https://github.com/midzer/dontbore-cli" rel="nofollow noopener noreferrer" target="_blank">CLI tool ↗</a>.</p>
+  </details>
 </article>
 <article id="recent">
   <h2>Recent logins on</h2>
