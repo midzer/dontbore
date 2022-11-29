@@ -28,7 +28,7 @@
   </details>
   <details>
     <summary>Browsing sucks. Is there any other way to access those logins?</summary>
-    <p>Yes, there is a <a href="https://github.com/midzer/dontbore-cli" rel="nofollow noopener noreferrer" target="_blank">CLI tool ↗</a>.</p>
+    <p>Yes, you can access the API directly via `curl https://api.dontbo.re/[domain]` and there is a <a href="https://github.com/midzer/dontbore-cli" rel="nofollow noopener noreferrer" target="_blank">CLI tool ↗</a>.</p>
   </details>
 </article>
 <article id="recent">
