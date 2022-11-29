@@ -80,12 +80,17 @@
   function vote (button, value) {
     const element = button.closest('li');
     const date = element.getAttribute('data-date');
-    const vote = element.getAttribute('data-vote');
-    pushData(`https://api.dontbo.re/${domain}`, 'PUT', { date: date, vote: parseInt(vote) + value })
+    pushData(`https://api.dontbo.re/${domain}`, 'PUT', { date: date, vote: value })
     .then((data) => {
       invalidateAll();
     });
     button.disabled = true;
+  }
+  
+  function calcProgressWidth(first, second) {
+    const totalVotes = first + second;
+    
+    return first / totalVotes * 100;
   }
 
   afterUpdate(() => {
@@ -129,8 +134,16 @@
   <h1>{ $page.url.pathname.substring(1) } logins</h1>
   <ol>
     {#each data.logins as login, index}
-      <li data-date={login.date} data-vote={login.vote}>
-        submitted on: <samp>{new Intl.DateTimeFormat().format(Date.parse(login.date))}</samp>
+      <li data-date={login.date}>
+        <p>submitted on: <samp>{new Intl.DateTimeFormat().format(Date.parse(login.date))}</samp></p>
+        <div class="progress">
+          <div class="progress-bar bg-upvote" role="progressbar" aria-label="Upvotes" style="width: {calcProgressWidth(login.upvotes, login.downvotes)}%" aria-valuenow="{calcProgressWidth(login.upvotes, login.downvotes)}" aria-valuemin="0" aria-valuemax="100">{login.upvotes} upvotes</div>
+          <div class="progress-bar bg-downvote" role="progressbar" aria-label="Downvotes" style="width: {calcProgressWidth(login.downvotes, login.upvotes)}%" aria-valuenow="{calcProgressWidth(login.downvotes, login.upvotes)}" aria-valuemin="0" aria-valuemax="100">{login.downvotes} downvotes</div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Upvote or downvote">
+          <button class="btn-upvote">Up 🔺</button>
+          <button class="btn-downvote">Down 🔻</button>
+        </div>
         <label for="user{index}">Username:</label>
         <div class="input-group">
           <input type="text" name="user{index}"value={login.user} readonly>
@@ -140,12 +153,6 @@
         <div class="input-group">
           <input type="text" name="pass{index}"value={login.pass} readonly>
           <button class="btn-copy">Copy 💾</button>
-        </div>
-        <label for="vote{index}">Votes:</label>
-        <div class="input-group">
-          <input type="text" name="vote{index}"value={login.vote} readonly>
-          <button class="btn-upvote">Up 🔺</button>
-          <button class="btn-downvote">Down 🔻</button>
         </div>
       </li>
     {/each}

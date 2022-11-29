@@ -542,3 +542,53 @@ blockquote footer {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+.progress {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 0.375rem;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #0d6efd;
+    transition: width 0.6s ease;
+}
+
+.bg-upvote {
+    background-color: rgb(25,135,84);
+}
+
+.bg-downvote {
+    background-color: rgb(220,53,69);
+}
+
+.btn-group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.btn-group > button {
+    position: relative;
+    flex: 1 1 auto;
+}
+
+.btn-group > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btn-group > button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
