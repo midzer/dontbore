@@ -38,7 +38,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', function(event) {
-  if (event.request.method !== "POST") {
+  if (event.request.method === "GET") {
     event.respondWith(
       caches.open('ssrCache').then(function(cache) {
         return fetch(event.request).then(function(response) {
