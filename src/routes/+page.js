@@ -4,7 +4,7 @@ export async function load({ fetch }) {
     let domains = await res.json();
 
     domains.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    domains = domains.slice(0, 4);
+    domains = domains.slice(0, 5);
    
     return { domains };
 }
