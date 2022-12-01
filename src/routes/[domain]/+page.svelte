@@ -137,8 +137,8 @@
       <li data-date={login.date}>
         <p>submitted on: <samp>{new Intl.DateTimeFormat().format(Date.parse(login.date))}</samp></p>
         <div class="progress">
-          <div class="progress-bar bg-upvote" role="progressbar" aria-label="Upvotes" style="width: {calcProgressWidth(login.upvotes, login.downvotes)}%" aria-valuenow="{calcProgressWidth(login.upvotes, login.downvotes)}" aria-valuemin="0" aria-valuemax="100">{login.upvotes} upvotes</div>
-          <div class="progress-bar bg-downvote" role="progressbar" aria-label="Downvotes" style="width: {calcProgressWidth(login.downvotes, login.upvotes)}%" aria-valuenow="{calcProgressWidth(login.downvotes, login.upvotes)}" aria-valuemin="0" aria-valuemax="100">{login.downvotes} downvotes</div>
+          <div class="progress-bar bg-upvote" role="progressbar" aria-label="Upvotes" style="width: {calcProgressWidth(login.up, login.down)}%" aria-valuenow="{calcProgressWidth(login.up, login.down)}" aria-valuemin="0" aria-valuemax="100">{login.up} upvotes</div>
+          <div class="progress-bar bg-downvote" role="progressbar" aria-label="Downvotes" style="width: {calcProgressWidth(login.down, login.up)}%" aria-valuenow="{calcProgressWidth(login.down, login.up)}" aria-valuemin="0" aria-valuemax="100">{login.down} downvotes</div>
         </div>
         <div class="btn-group" role="group" aria-label="Upvote or downvote">
           <button class="btn-upvote">Up 🔺</button>
