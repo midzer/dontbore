@@ -172,7 +172,7 @@
     <label for="password">Password:</label>
     <input type="text" name="password" bind:value={password}>
     <label for="check">Check:</label>
-    <input type="text" name="check" placeholder={task.name} bind:value={check}>
+    <input type="text" name="check" placeholder={task.name} aria-placeholder={task.name} bind:value={check}>
     <button type="submit" disabled={domain && username && password && check == task.result ? false : true}>Submit</button>
   </form>
 </section>
