@@ -3,6 +3,6 @@
   publish = "build"
 
 [[headers]]
-  for = "/*" # you can configure the correct paths here
+  for = "/*"
   [headers.values]
     access-control-allow-origin = "*"
