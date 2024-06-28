@@ -5,4 +5,4 @@
 [[headers]]
   for = "/*" # you can configure the correct paths here
   [headers.values]
-    access-control-allow-origin = "api.dontbo.re"
+    access-control-allow-origin = "*"
